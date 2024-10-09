@@ -1,0 +1,61 @@
+# Define mathematical functions
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        return "Error: Division by zero!"
+    return a / b
+
+# Dictionary to map operations
+operations = {
+    '+': add,
+    '-': subtract,
+    '*': multiply,
+    '/': divide
+}
+
+# Calculator function
+def calculator():
+    num1 = float(input("Enter the first number: "))
+    should_continue = True
+    
+    while should_continue:
+        print("\nAvailable operations:")
+        for symbol in operations:
+            print(symbol)
+        
+        operation_symbol = input("Choose an operation: ")
+        
+        if operation_symbol not in operations:
+            print("Invalid operation. Please try again.")
+            continue
+        
+        num2 = float(input("Enter the second number: "))
+        
+        # Retrieve the corresponding function from the dictionary
+        calculation_function = operations[operation_symbol]
+        
+        # Perform the calculation
+        answer = calculation_function(num1, num2)
+        
+        # Print the result
+        print(f"{num1} {operation_symbol} {num2} = {answer}")
+        
+        # Ask the user if they want to continue
+        continue_choice = input("Do you want to continue with this result? (yes/no): ").strip().lower()
+        
+        if continue_choice == 'yes':
+            num1 = answer  # Update the first number to the result
+        else:
+            should_continue = False  # Stop the loop and start new calculation
+            calculator()  # Restart the calculator
+
+# Start the calculator
+calculator()
